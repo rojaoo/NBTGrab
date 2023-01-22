@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "nbtgrab",
+  "version": "${version}",
+  "name": "NBTGrab",
+  "description": "Copy NBT data of items",
+  "authors": ["Luihum"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/nbtgrab/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "com.luihum.nbtgrab.client.NBTGrabClient"
+    ],
+    "main": [
+      "com.luihum.nbtgrab.NBTGrab"
+    ]
+  },
+  "mixins": [
+    "nbtgrab.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.10",
+    "fabric-api": "*",
+    "minecraft": "1.19.2"
+  }
+}
