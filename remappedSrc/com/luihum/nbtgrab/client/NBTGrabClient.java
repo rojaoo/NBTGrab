@@ -1,6 +1,5 @@
 package com.luihum.nbtgrab.client;
 
-import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -13,10 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
-import org.slf4j.Logger;
+
 @Environment(EnvType.CLIENT)
 public class NBTGrabClient implements ClientModInitializer {
-    private static final Logger LOGGER = LogUtils.getLogger();
 
     private static KeyBinding copyNBTBinding;
 
@@ -32,15 +30,10 @@ public class NBTGrabClient implements ClientModInitializer {
             while (copyNBTBinding.wasPressed()) {
                 if (client.player != null) {
                     ItemStack curItem = client.player.getMainHandStack();
-
                     NbtCompound curItemNBT = curItem.getNbt();
-                    if (curItemNBT != null) {
-                        LOGGER.info(curItem.getNbt().toString());
-                        client.keyboard.setClipboard(curItemNBT.toString());
-                        client.getToastManager().add(new SystemToast(SystemToast.Type.NARRATOR_TOGGLE, Text.literal("NBTGrab"), Text.literal("Copied NBT to clipboard!")));
-                    } else {
-                        client.getToastManager().add(new SystemToast(SystemToast.Type.NARRATOR_TOGGLE, Text.literal("NBTGrab"), Text.literal("No NBT for item!")));
-                    }
+                    String curItemID = curItem.toString().split("\\s+")[1];
+                    client.keyboard.setClipboard(curItemID+(curItemNBT != null ? curItemNBT : ""));
+                    client.getToastManager().add(new SystemToast(SystemToast.Type.NARRATOR_TOGGLE, Text.literal("NBTGrab"), Text.literal("Copied item to clipboard!")));
                 }
             }
         });
