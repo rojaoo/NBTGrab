@@ -1,4 +1,4 @@
-package com.luihum.nbtgrab;
+package io.github.luihum.nbtgrab;
 
 import net.fabricmc.api.ModInitializer;
 

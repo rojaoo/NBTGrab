@@ -1,4 +1,4 @@
-package com.luihum.nbtgrab.client;
+package io.github.luihum.nbtgrab.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -33,7 +33,7 @@ public class NBTGrabClient implements ClientModInitializer {
                     NbtCompound curItemNBT = curItem.getNbt();
                     String curItemID = curItem.toString().split("\\s+")[1];
                     client.keyboard.setClipboard(curItemID+(curItemNBT != null ? curItemNBT : ""));
-                    client.getToastManager().add(new SystemToast(SystemToast.Type.NARRATOR_TOGGLE, Text.literal("NBTGrab"), Text.literal("Copied item to clipboard!")));
+                    client.getToastManager().add(new SystemToast(SystemToast.Type.NARRATOR_TOGGLE, Text.translatable("nbtgrab.name"), Text.translatable("nbtgrab.toast")));
                 }
             }
         });

@@ -1,4 +1,6 @@
 {
   "key.nbtgrab.grab": "Grab NBT",
-  "category.nbtgrab": "NBTGrab"
+  "category.nbtgrab": "NBTGrab",
+  "nbtgrab.name": "NBTGrab",
+  "nbtgrab.toast": "Copied item to clipboard!"
 }
