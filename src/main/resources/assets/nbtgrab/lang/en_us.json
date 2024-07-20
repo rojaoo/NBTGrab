@@ -2,5 +2,6 @@
   "key.nbtgrab.grab": "Grab NBT",
   "category.nbtgrab": "NBTGrab",
   "nbtgrab.name": "NBTGrab",
-  "nbtgrab.toast": "Copied item to clipboard!"
+  "nbtgrab.message": "Copied item NBT to clipboard!",
+  "nbtgrab.no_item": "No item in either hand."
 }
