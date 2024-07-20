@@ -6,7 +6,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.toast.SystemToast;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -30,10 +29,17 @@ public class NBTGrabClient implements ClientModInitializer {
             while (copyNBTBinding.wasPressed()) {
                 if (client.player != null) {
                     ItemStack curItem = client.player.getMainHandStack();
-                    NbtCompound curItemNBT = curItem.getNbt();
-                    String curItemID = curItem.toString().split("\\s+")[1];
-                    client.keyboard.setClipboard(curItemID+(curItemNBT != null ? curItemNBT : ""));
-                    client.getToastManager().add(new SystemToast(SystemToast.Type.NARRATOR_TOGGLE, Text.translatable("nbtgrab.name"), Text.translatable("nbtgrab.toast")));
+                    if (curItem.isEmpty()) {
+                        curItem = client.player.getOffHandStack();
+                    }
+                    if (!curItem.isEmpty()) {
+                        NbtCompound curItemNBT = curItem.getNbt();
+                        String curItemID = curItem.toString().split("\\s+")[1];
+                        client.keyboard.setClipboard(curItemID + (curItemNBT != null ? curItemNBT : ""));
+                        client.player.sendMessage(Text.translatable("nbtgrab.message", curItemID + (curItemNBT != null ? curItemNBT : "")), false);
+                    } else {
+                        client.player.sendMessage(Text.translatable("nbtgrab.no_item"), false);
+                    }
                 }
             }
         });
